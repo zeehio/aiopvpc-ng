@@ -11,11 +11,11 @@ from aiopvpc.pvpc_tariff import get_current_and_next_tariff_periods
 @pytest.mark.parametrize(
     "year, days_weekend_p3, extra_days_p3",
     (
-        (2021, 104, 7),
-        (2022, 105, 7),
-        (2023, 105, 9),
-        (2024, 104, 7),
-        (2025, 104, 7),
+        (2021, 104, 6),
+        (2022, 105, 6),
+        (2023, 105, 8),
+        (2024, 104, 6),
+        (2025, 104, 6),
     ),
 )
 def test_number_of_national_holidays(year, days_weekend_p3, extra_days_p3):
