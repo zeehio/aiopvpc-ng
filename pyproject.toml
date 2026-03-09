@@ -1,7 +1,7 @@
 [project]
 name = "aiopvpc-ng"
 version = "5.0.0"
-description = "Next Generation async downloader for Spanish Electricity hourly prices (PVPC)"
+description = "async downloader for Spanish Electricity hourly prices (PVPC). Fork from aiopvpc due to inactivity of the original project"
 authors = [{ name = "Eugenio Panadero", email = "eugenio.panadero@gmail.com" }]
 maintainers = [{ name = "Sergio Oller", email = "sergioller@gmail.com" }]
 license = { text = "MIT" }
