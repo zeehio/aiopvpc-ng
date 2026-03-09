@@ -1,6 +1,6 @@
 """Home Assistant helper methods."""
 
-from aiopvpc.const import (
+from aiopvpc_ng.const import (
     ALL_SENSORS,
     KEY_ADJUSTMENT,
     KEY_INDEXED,

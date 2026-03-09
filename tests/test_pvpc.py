@@ -1,4 +1,4 @@
-"""Tests for aiopvpc."""
+"""Tests for aiopvpc_ng."""
 
 import logging
 from asyncio import TimeoutError
@@ -8,7 +8,7 @@ from typing import cast
 import pytest
 from aiohttp import ClientError
 
-from aiopvpc.const import (
+from aiopvpc_ng.const import (
     ALL_SENSORS,
     ATTRIBUTIONS,
     DataSource,
@@ -18,7 +18,7 @@ from aiopvpc.const import (
     REFERENCE_TZ,
     UTC_TZ,
 )
-from aiopvpc.pvpc_data import BadApiTokenAuthError, PVPCData
+from aiopvpc_ng.pvpc_data import BadApiTokenAuthError, PVPCData
 from tests.conftest import check_num_datapoints, MockAsyncSession, run_h_step, TZ_TEST
 
 

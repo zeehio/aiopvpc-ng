@@ -1,1 +1,1 @@
-"""Tests for aiopvpc."""
+"""Tests for aiopvpc_ng."""

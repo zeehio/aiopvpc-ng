@@ -1,11 +1,11 @@
-"""Tests for aiopvpc."""
+"""Tests for aiopvpc_ng."""
 
 from datetime import datetime, timedelta
 from typing import cast
 
 import pytest
 
-from aiopvpc.const import (
+from aiopvpc_ng.const import (
     ALL_SENSORS,
     DataSource,
     KEY_ADJUSTMENT,
@@ -16,7 +16,7 @@ from aiopvpc.const import (
     REFERENCE_TZ,
     SENSOR_KEY_TO_DATAID,
 )
-from aiopvpc.pvpc_data import PVPCData
+from aiopvpc_ng.pvpc_data import PVPCData
 from tests.conftest import MockAsyncSession, TZ_TEST
 
 

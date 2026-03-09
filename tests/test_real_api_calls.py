@@ -1,4 +1,4 @@
-"""Tests for aiopvpc."""
+"""Tests for aiopvpc_ng."""
 
 import os
 from datetime import datetime
@@ -7,24 +7,27 @@ from zoneinfo import ZoneInfo
 
 import pytest
 from aiohttp import ClientSession
-from dotenv import load_dotenv
 
-from aiopvpc import PVPCData
-from aiopvpc.const import ALL_SENSORS, DataSource, KEY_PVPC, REFERENCE_TZ
+from aiopvpc_ng import PVPCData
+from aiopvpc_ng.const import ALL_SENSORS, DataSource, KEY_PVPC, REFERENCE_TZ
 from tests.conftest import TZ_TEST
-
-load_dotenv()
 
 
 async def _get_real_data(
     timezone: ZoneInfo, data_source: str, indicators: tuple[str, ...], ts: datetime
 ):
+    if data_source == "esios":
+        api_token = os.getenv("ESIOS_TOKEN")
+        if api_token is None:
+            pytest.skip("ESIOS_TOKEN missing, skipping test.")
+    else:
+        api_token = None
     async with ClientSession() as session:
         pvpc_data = PVPCData(
             session=session,
             tariff="2.0TD",
             local_timezone=timezone,
-            api_token=os.getenv("ESIOS_TOKEN") if data_source == "esios" else None,
+            api_token=api_token,
             data_source=cast(DataSource, data_source),
             sensor_keys=indicators,
         )

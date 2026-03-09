@@ -5,12 +5,12 @@ Simple aio library to download Spanish electricity hourly prices.
 * Parser for the contents of the JSON files
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from itertools import groupby
 from operator import itemgetter
 from typing import Any
 
-from aiopvpc.const import (
+from aiopvpc_ng.const import (
     DataSource,
     EsiosResponse,
     GEOZONE_ID2NAME,
@@ -54,7 +54,7 @@ def extract_prices_from_esios_public(
     return EsiosResponse(
         name="PVPC ESIOS",
         data_id="legacy",
-        last_update=datetime.utcnow().replace(microsecond=0, tzinfo=UTC_TZ),
+        last_update=datetime.now(timezone.utc).replace(microsecond=0),
         unit="€/kWh",
         series={KEY_PVPC: pvpc_prices},
     )
@@ -72,7 +72,7 @@ def extract_prices_from_esios_token(
     unit = "•".join(mag["name"] for mag in indicator_data["magnitud"])
     unit_tiempo = "•".join(mag["name"] for mag in indicator_data["tiempo"])
     unit += f"/{unit_tiempo}"
-    ts_update = datetime.utcnow().replace(microsecond=0, tzinfo=UTC_TZ)
+    ts_update = datetime.now(timezone.utc).replace(microsecond=0)
 
     def _parse_dt(ts: str) -> datetime:
         return datetime.fromisoformat(ts).astimezone(UTC_TZ) + offset_timezone

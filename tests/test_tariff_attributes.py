@@ -1,11 +1,11 @@
-"""Tests for aiopvpc."""
+"""Tests for aiopvpc_ng."""
 
 from datetime import datetime, timedelta
 
 import pytest
 
-from aiopvpc.const import REFERENCE_TZ
-from aiopvpc.pvpc_tariff import get_current_and_next_tariff_periods
+from aiopvpc_ng.const import REFERENCE_TZ
+from aiopvpc_ng.pvpc_tariff import get_current_and_next_tariff_periods
 
 
 @pytest.mark.parametrize(

@@ -1,4 +1,4 @@
-"""Tests for aiopvpc."""
+"""Tests for aiopvpc_ng."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from datetime import datetime
 
 import pytest
 
-from aiopvpc.const import (
+from aiopvpc_ng.const import (
     ALL_SENSORS,
     KEY_ADJUSTMENT,
     KEY_INJECTION,
@@ -17,8 +17,8 @@ from aiopvpc.const import (
     TARIFFS,
     UTC_TZ,
 )
-from aiopvpc.ha_helpers import get_enabled_sensor_keys, make_sensor_unique_id
-from aiopvpc.pvpc_data import BadApiTokenAuthError, PVPCData
+from aiopvpc_ng.ha_helpers import get_enabled_sensor_keys, make_sensor_unique_id
+from aiopvpc_ng.pvpc_data import BadApiTokenAuthError, PVPCData
 from tests.conftest import check_num_datapoints, MockAsyncSession, run_h_step
 
 

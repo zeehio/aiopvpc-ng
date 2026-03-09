@@ -1,12 +1,12 @@
-"""Tests for aiopvpc."""
+"""Tests for aiopvpc_ng."""
 
 from datetime import datetime
 from typing import cast
 
 import pytest
 
-from aiopvpc.const import DataSource, KEY_PVPC, REFERENCE_TZ, TARIFFS, UTC_TZ
-from aiopvpc.pvpc_data import PVPCData
+from aiopvpc_ng.const import DataSource, KEY_PVPC, REFERENCE_TZ, TARIFFS, UTC_TZ
+from aiopvpc_ng.pvpc_data import PVPCData
 from tests.conftest import MockAsyncSession, TZ_TEST
 
 

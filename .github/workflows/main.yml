@@ -11,23 +11,20 @@ jobs:
       id-token: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Set up python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
 
-      - name: Run Poetry image
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: 1.7.1
+      - name: Set up Python
+        run: uv python install
+    
 
-      - name: Install library
-        run: poetry install --no-interaction
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
 
       - name: Run tests
-        run: poetry run pytest
+        run: uv run pytest
 
         # publish version only when pyproject.toml is changed in master
       - name: Filter changes in pyproject
@@ -40,7 +37,7 @@ jobs:
 
       - if: ${{ (github.ref == 'refs/heads/master') && (steps.changes.outputs.root == 'true')}}
         name: Build
-        run: poetry build
+        run: uv build
 
       - if: ${{ (github.ref == 'refs/heads/master') && (steps.changes.outputs.root == 'true')}}
         name: Publish release distributions to PyPI

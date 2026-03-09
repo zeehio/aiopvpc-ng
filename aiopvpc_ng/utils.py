@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from aiopvpc.const import UTC_TZ
+from aiopvpc_ng.const import UTC_TZ
 
 
 def ensure_utc_time(ts: datetime) -> datetime:

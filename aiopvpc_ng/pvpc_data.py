@@ -18,7 +18,7 @@ from typing import Any
 import aiohttp
 import async_timeout
 
-from aiopvpc.const import (
+from aiopvpc_ng.const import (
     ALL_SENSORS,
     ATTRIBUTIONS,
     DataSource,
@@ -34,10 +34,10 @@ from aiopvpc.const import (
     UTC_TZ,
     zoneinfo,
 )
-from aiopvpc.parser import extract_esios_data, get_daily_urls_to_download
-from aiopvpc.prices import add_composed_price_sensors, make_price_sensor_attributes
-from aiopvpc.pvpc_tariff import get_current_and_next_tariff_periods
-from aiopvpc.utils import ensure_utc_time
+from aiopvpc_ng.parser import extract_esios_data, get_daily_urls_to_download
+from aiopvpc_ng.prices import add_composed_price_sensors, make_price_sensor_attributes
+from aiopvpc_ng.pvpc_tariff import get_current_and_next_tariff_periods
+from aiopvpc_ng.utils import ensure_utc_time
 
 _LOGGER = logging.getLogger(__name__)
 
