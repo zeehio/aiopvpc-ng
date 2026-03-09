@@ -3,12 +3,16 @@ name: Publish package on pypi
 on:
   push:
     branches: [master]
+    tags: ["v*"]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
 
 jobs:
-  publish-flow:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
@@ -18,7 +22,6 @@ jobs:
 
       - name: Set up Python
         run: uv python install
-    
 
       - name: Install the project
         run: uv sync --locked --all-extras --dev
@@ -26,19 +29,31 @@ jobs:
       - name: Run tests
         run: uv run pytest
 
-        # publish version only when pyproject.toml is changed in master
-      - name: Filter changes in pyproject
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            root:
-              - 'pyproject.toml'
-
-      - if: ${{ (github.ref == 'refs/heads/master') && (steps.changes.outputs.root == 'true')}}
-        name: Build
+      - name: Build a binary wheel and a source tarball
         run: uv build
 
-      - if: ${{ (github.ref == 'refs/heads/master') && (steps.changes.outputs.root == 'true')}}
-        name: Publish release distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v5
+        with:
+          name: python-package-distributions
+          path: dist/
+
+  publish-to-pypi:
+    name: Publish package to PyPI
+    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
+    needs:
+    - build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/aiopvpc-ng
+    permissions:
+      id-token: write
+    steps:
+    - name: Download all the dists
+      uses: actions/download-artifact@v6
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
