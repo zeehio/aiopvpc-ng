@@ -1,5 +1,13 @@
 # Changelog
 
+## [v5.0.0]
+
+- New package name aiopvpc-ng
+- New repository https://github.com/zeehio/aiopvpc-ng
+- Fix detection of 2026 holidays (and any year) by @derallye at #1 from https://github.com/azogue/aiopvpc/pull/82
+- Switch from poetry to uv
+- Fix DeprecationWarning on `datetime.utcnow()`
+
 ## [v4.3.1](https://github.com/azogue/aiopvpc/tree/v4.3.1) - 🐛 Fix unsorted prices in composed sensor 'INDEXED' (2024-03-25)
 
 [Full Changelog](https://github.com/azogue/aiopvpc/compare/v4.3.0...v4.3.1)
