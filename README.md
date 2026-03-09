@@ -27,13 +27,13 @@ Install with `pip install aiopvpc-ng` or clone it to run tests or anything else.
 
 ```python
 import aiohttp
-from datetime import datetime
+from datetime import datetime, timezone
 from aiopvpc_ng import PVPCData
 
 async with aiohttp.ClientSession() as session:
     pvpc_handler = PVPCData(session=session, tariff="2.0TD")
     esios_data = await pvpc_handler.async_update_all(
-        current_data=None, now=datetime.utcnow()
+        current_data=None, now=datetime.now(timezone.utc)
     )
 print(esios_data.sensors["PVPC"])
 ```
